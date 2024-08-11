@@ -1,5 +1,6 @@
 package com.example.food_ordering_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -36,6 +37,9 @@ public class RegisterActivity extends AppCompatActivity {
         passwordText = findViewById(R.id.textPassword);
         profileImage = findViewById(R.id.profileImage);
 
+        // Initialize userDao here
+        userDao = new UserDao(this);
+
 
     }
 
@@ -47,5 +51,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         UserModel userModel = new UserModel(username, email, password, imageUrl);
         userDao.registerUser(userModel);
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 }
