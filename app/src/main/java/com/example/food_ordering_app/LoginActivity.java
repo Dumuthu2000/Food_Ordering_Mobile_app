@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         UserModel user = userDao.loginUser(email, password);
 
         if (user != null) {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
         } else {
             // User login failed, no need to start MainActivity
