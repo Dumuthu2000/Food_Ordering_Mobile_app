@@ -1,8 +1,10 @@
 package com.example.food_ordering_app.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,15 +17,15 @@ import java.util.List;
 
 public class ItemCardAdapter extends RecyclerView.Adapter<ItemCardAdapter.CardViewHolder> {
 
-    private List<ItemModel> cardList;
-
+    private List<ItemModel> itemList;
     private OnAddToCartListener onAddToCartListener;
+
     public interface OnAddToCartListener {
-        void onAddToCart();
+        void onAddToCart(ItemModel item);
     }
 
-    public ItemCardAdapter(List<ItemModel> cardList, OnAddToCartListener listener) {
-        this.cardList = cardList;
+    public ItemCardAdapter(List<ItemModel> itemList, OnAddToCartListener listener) {
+        this.itemList = itemList;
         this.onAddToCartListener = listener;
     }
 
@@ -37,23 +39,23 @@ public class ItemCardAdapter extends RecyclerView.Adapter<ItemCardAdapter.CardVi
 
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
-        ItemModel card = cardList.get(position);
-        holder.textViewName.setText(card.getName());
-        holder.textViewDescription.setText(card.getDescription());
-        holder.textViewPrice.setText(String.valueOf(card.getPrice()));
-        holder.textViewCategory.setText(card.getCategory());
-        holder.textViewAvailability.setText(card.isAvailability() ? "Available" : "Unavailable");
+        ItemModel item = itemList.get(position);
+        holder.textViewName.setText(item.getName());
+        holder.textViewDescription.setText(item.getDescription());
+        holder.textViewPrice.setText(String.valueOf(item.getPrice()));
+        holder.textViewCategory.setText(item.getCategory());
+        holder.textViewAvailability.setText(item.isAvailability() ? "Available" : "Unavailable");
 
-        // Handle Add to Cart button click
         holder.buttonAddToCart.setOnClickListener(v -> {
-            onAddToCartListener.onAddToCart();
+            if (onAddToCartListener != null) {
+                onAddToCartListener.onAddToCart(item);
+            }
         });
     }
 
-
     @Override
     public int getItemCount() {
-        return cardList.size();
+        return itemList.size();
     }
 
     public static class CardViewHolder extends RecyclerView.ViewHolder {
@@ -62,8 +64,9 @@ public class ItemCardAdapter extends RecyclerView.Adapter<ItemCardAdapter.CardVi
         public TextView textViewPrice;
         public TextView textViewCategory;
         public TextView textViewAvailability;
-        public TextView buttonAddToCart;
+        public Button buttonAddToCart;
 
+        @SuppressLint("WrongViewCast")
         public CardViewHolder(View view) {
             super(view);
             textViewName = view.findViewById(R.id.textViewName);
@@ -74,5 +77,4 @@ public class ItemCardAdapter extends RecyclerView.Adapter<ItemCardAdapter.CardVi
             buttonAddToCart = view.findViewById(R.id.buttonAddToCart);
         }
     }
-
 }

@@ -10,6 +10,17 @@ public class ItemModel {
     private String image;
 
     public ItemModel(String name, String description, double price, boolean availability, String category, String image) {
+        this.itemID = itemID;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.availability = availability;
+        this.category = category;
+        this.image = image;
+    }
+
+    public ItemModel(int itemID, String name, String description, double price, boolean availability, String category, String image) {
+        this.itemID = itemID;
         this.name = name;
         this.description = description;
         this.price = price;
@@ -73,4 +84,5 @@ public class ItemModel {
     public void setImage(String image) {
         this.image = image;
     }
+
 }

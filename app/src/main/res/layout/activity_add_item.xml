@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Item Name -->
+    <EditText
+        android:id="@+id/editTextItemName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Item Name" />
+
+    <!-- Item Description -->
+    <EditText
+        android:id="@+id/editTextItemDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Item Description" />
+
+    <!-- Item Price -->
+    <EditText
+        android:id="@+id/editTextItemPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Item Price"
+        android:inputType="numberDecimal" />
+
+    <!-- Item Category -->
+    <EditText
+        android:id="@+id/editTextItemCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Item Category" />
+
+    <!-- Item Image URL -->
+    <EditText
+        android:id="@+id/editTextItemImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Item Image URL" />
+
+    <!-- Item Availability (Checkbox) -->
+    <CheckBox
+        android:id="@+id/checkBoxItemAvailability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Available" />
+
+    <!-- Submit Button -->
+    <Button
+        android:onClick="handleAddItem"
+        android:id="@+id/buttonSubmitItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit" />
+
+</LinearLayout>
