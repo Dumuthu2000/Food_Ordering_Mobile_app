@@ -16,6 +16,8 @@ public class DbHandler extends SQLiteOpenHelper {
     public static final String COLUMN_PASSWORD = "password";
     public static final String COLUMN_PROFILE_PICTURE = "profile_picture";
 
+
+
     // Add a Context field
     private final Context context;
 
