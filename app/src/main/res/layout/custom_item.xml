@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -20,8 +21,9 @@
             android:id="@+id/imageViewItem"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_gravity="center_vertical"
             android:scaleType="centerCrop"
-            android:layout_gravity="center_vertical"/>
+            tools:srcCompat="@drawable/login" />
 
         <!-- Vertical layout for text content -->
         <LinearLayout
@@ -70,7 +72,6 @@
                 android:textStyle="bold"
                 android:textColor="@android:color/holo_red_dark"
                 android:layout_marginTop="4dp"/>
-
             <!-- Item Availability -->
             <TextView
                 android:id="@+id/textViewAvailability"
@@ -79,7 +80,21 @@
                 android:text="Available"
                 android:textSize="14sp"
                 android:layout_marginTop="4dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/button_background"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:onClick="handleAddToCart"
+                android:text="Add to Cart"/>
 
         </LinearLayout>
+
     </LinearLayout>
+
+
+
+
 </androidx.cardview.widget.CardView>

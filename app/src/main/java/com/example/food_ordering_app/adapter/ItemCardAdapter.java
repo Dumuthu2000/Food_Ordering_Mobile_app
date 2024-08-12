@@ -1,4 +1,4 @@
-package com.example.food_ordering_app;
+package com.example.food_ordering_app.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

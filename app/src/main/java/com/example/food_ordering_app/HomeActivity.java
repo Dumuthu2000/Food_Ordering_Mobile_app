@@ -1,6 +1,7 @@
 package com.example.food_ordering_app;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -11,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.food_ordering_app.adapter.ItemCardAdapter;
 import com.example.food_ordering_app.model.ItemModel;
 
 import java.util.ArrayList;
@@ -48,5 +50,6 @@ public class HomeActivity extends AppCompatActivity {
         // Set up the adapter
         itemCardAdapter = new ItemCardAdapter(itemList);
         recyclerView.setAdapter(itemCardAdapter);
+
     }
 }
