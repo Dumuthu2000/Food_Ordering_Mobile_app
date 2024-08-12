@@ -17,8 +17,14 @@ public class ItemCardAdapter extends RecyclerView.Adapter<ItemCardAdapter.CardVi
 
     private List<ItemModel> cardList;
 
-    public ItemCardAdapter(List<ItemModel> cardList) {
+    private OnAddToCartListener onAddToCartListener;
+    public interface OnAddToCartListener {
+        void onAddToCart();
+    }
+
+    public ItemCardAdapter(List<ItemModel> cardList, OnAddToCartListener listener) {
         this.cardList = cardList;
+        this.onAddToCartListener = listener;
     }
 
     @NonNull
@@ -37,6 +43,11 @@ public class ItemCardAdapter extends RecyclerView.Adapter<ItemCardAdapter.CardVi
         holder.textViewPrice.setText(String.valueOf(card.getPrice()));
         holder.textViewCategory.setText(card.getCategory());
         holder.textViewAvailability.setText(card.isAvailability() ? "Available" : "Unavailable");
+
+        // Handle Add to Cart button click
+        holder.buttonAddToCart.setOnClickListener(v -> {
+            onAddToCartListener.onAddToCart();
+        });
     }
 
 
@@ -51,6 +62,7 @@ public class ItemCardAdapter extends RecyclerView.Adapter<ItemCardAdapter.CardVi
         public TextView textViewPrice;
         public TextView textViewCategory;
         public TextView textViewAvailability;
+        public TextView buttonAddToCart;
 
         public CardViewHolder(View view) {
             super(view);
@@ -59,6 +71,7 @@ public class ItemCardAdapter extends RecyclerView.Adapter<ItemCardAdapter.CardVi
             textViewPrice = view.findViewById(R.id.textViewPrice);
             textViewCategory = view.findViewById(R.id.textViewCategory);
             textViewAvailability = view.findViewById(R.id.textViewAvailability);
+            buttonAddToCart = view.findViewById(R.id.buttonAddToCart);
         }
     }
 

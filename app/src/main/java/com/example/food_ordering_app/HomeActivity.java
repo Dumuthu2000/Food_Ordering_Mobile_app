@@ -1,14 +1,9 @@
 package com.example.food_ordering_app;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,19 +17,16 @@ public class HomeActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ItemCardAdapter itemCardAdapter;
     private List<ItemModel> itemList;
-    @SuppressLint("MissingInflatedId")
+    private TextView cartCountView;
+    private int cartCount = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
         recyclerView = findViewById(R.id.recyclerView);
+        cartCountView = findViewById(R.id.cartCount);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Initialize item list and add some data
@@ -42,14 +34,14 @@ public class HomeActivity extends AppCompatActivity {
         itemList.add(new ItemModel("Pizza", "Delicious pizza with extra cheese", 12.99, true, "Main Course", "pizza_image_url"));
         itemList.add(new ItemModel("Burger", "Juicy beef burger with lettuce and tomato", 9.99, true, "Main Course", "burger_image_url"));
         itemList.add(new ItemModel("Pasta", "Creamy Alfredo pasta with mushrooms", 14.99, true, "Main Course", "pasta_image_url"));
-        itemList.add(new ItemModel("Pasta", "Creamy Alfredo pasta with mushrooms", 14.99, true, "Main Course", "pasta_image_url"));
-        itemList.add(new ItemModel("Pasta", "Creamy Alfredo pasta with mushrooms", 14.99, true, "Main Course", "pasta_image_url"));
-        itemList.add(new ItemModel("Pasta", "Creamy Alfredo pasta with mushrooms", 14.99, false, "Main Course", "pasta_image_url"));
-        itemList.add(new ItemModel("Pasta", "Creamy Alfredo pasta with mushrooms", 14.99, false, "Main Course", "pasta_image_url"));
 
-        // Set up the adapter
-        itemCardAdapter = new ItemCardAdapter(itemList);
+        // Set up the adapter with the listener for adding to the cart
+        itemCardAdapter = new ItemCardAdapter(itemList, this::updateCartCount);
         recyclerView.setAdapter(itemCardAdapter);
+    }
 
+    private void updateCartCount() {
+        cartCount++;
+        cartCountView.setText(String.valueOf(cartCount));
     }
 }
