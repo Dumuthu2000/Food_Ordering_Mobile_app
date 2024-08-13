@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/text_admin_dashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Admin Dashboard"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/image_view_placeholder"
+        android:layout_width="400dp"
+        android:layout_height="300dp"
+        android:layout_below="@id/text_admin_dashboard"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/admin_image" />
+
+    <!-- Optional description -->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/image_view_placeholder">
+
+        <Button
+            android:id="@+id/button_manage_users"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Manage Users"
+            android:drawablePadding="8dp"
+            android:padding="16dp"
+            android:textSize="18sp"
+            android:textColor="@android:color/white" /> <!-- Add background color -->
+
+        <Button
+            android:id="@+id/button_manage_items"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Manage Items"
+            android:drawablePadding="8dp"
+            android:padding="16dp"
+            android:textSize="18sp"
+            android:textColor="@android:color/white" /> <!-- Add background color -->
+
+        <Button
+            android:id="@+id/button_manage_orders"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Manage Orders"
+            android:drawablePadding="8dp"
+            android:padding="16dp"
+            android:textSize="18sp"
+            android:textColor="@android:color/white" /> <!-- Add background color -->
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -30,7 +30,7 @@ public class AdminLogin extends AppCompatActivity {
     }
 
     public void handleAdminLoginBtn(View view){
-        Intent intent = new Intent(this, SplashActivity.class);
+        Intent intent = new Intent(this, DashboardActivity.class);
         startActivity(intent);
     }
 }

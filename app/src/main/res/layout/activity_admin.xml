@@ -1,0 +1,100 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Wrapper for heading and icon -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <!-- Heading for the Manage Items dialog -->
+        <TextView
+            android:id="@+id/textViewEditItemHeading1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Manage Items"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+        <!-- Icon next to the heading -->
+        <ImageView
+            android:id="@+id/icon_manage_items"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/back"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <!-- Sub-heading for Add Item -->
+    <TextView
+        android:id="@+id/textViewEditItemHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Item"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Input fields -->
+    <EditText
+        android:id="@+id/editTextItemName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Item Name" />
+
+    <EditText
+        android:id="@+id/editTextItemDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Item Description" />
+
+    <EditText
+        android:id="@+id/editTextItemPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Item Price"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/editTextItemCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Item Category" />
+
+    <EditText
+        android:id="@+id/editTextItemImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Item Image URL" />
+
+    <!-- Checkbox for availability -->
+    <CheckBox
+        android:id="@+id/checkBoxItemAvailability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Available" />
+
+    <!-- Submit button -->
+    <Button
+        android:onClick="handleAddItem"
+        android:id="@+id/buttonSubmitItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD" />
+
+    <!-- RecyclerView for displaying items -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewItems"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:padding="8dp" />
+
+</LinearLayout>

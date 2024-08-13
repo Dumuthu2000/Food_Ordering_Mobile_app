@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.food_ordering_app.adapter.ItemAdapter;
-import com.example.food_ordering_app.dao.ItemDao;
+import com.example.food_ordering_app.dao.UserItemDao;
 import com.example.food_ordering_app.model.ItemModel;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class HomeActivity extends AppCompatActivity implements ItemAdapter.OnAdd
     private List<ItemModel> itemList;
     private TextView cartCountView;
     private int cartCount = 0;
-    private ItemDao itemDao;
+    private UserItemDao itemDao;
     private Button cartButton; // Reference to the cart button
 
     @Override
@@ -37,7 +37,7 @@ public class HomeActivity extends AppCompatActivity implements ItemAdapter.OnAdd
         cartButton = findViewById(R.id.cartButton); // Initialize the cart button
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        itemDao = new ItemDao(this);
+        itemDao = new UserItemDao(this);
 
         // Fetch items from database
         itemList = itemDao.getAllItems();

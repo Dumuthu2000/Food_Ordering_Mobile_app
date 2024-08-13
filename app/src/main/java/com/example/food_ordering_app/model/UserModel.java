@@ -10,6 +10,13 @@ public class UserModel {
     public UserModel() {
     }
 
+    public UserModel(int userId, String username, String email, String profilePicture) {
+        this.userId = userId;
+        this.username = username;
+        this.email = email;
+        this.profilePicture = profilePicture;
+    }
+
     public UserModel(String email, String password) {
         this.email = email;
         this.password = password;

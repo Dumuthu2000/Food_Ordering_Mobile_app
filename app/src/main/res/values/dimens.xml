@@ -1,0 +1,5 @@
+<resources>
+    <!-- Other dimensions -->
+
+    <dimen name="spacing">16dp</dimen>
+</resources>

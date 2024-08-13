@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.food_ordering_app.dao.ItemDao;
+import com.example.food_ordering_app.dao.UserItemDao;
 import com.example.food_ordering_app.model.ItemModel;
 
 public class AddItemActivity extends AppCompatActivity {
@@ -18,7 +18,7 @@ public class AddItemActivity extends AppCompatActivity {
             editTextItemCategory, editTextItemImage;
     private CheckBox checkBoxItemAvailability;
     private Button buttonSubmitItem;
-    private ItemDao itemDao;
+    private UserItemDao itemDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class AddItemActivity extends AppCompatActivity {
         buttonSubmitItem = findViewById(R.id.buttonSubmitItem);
 
         // Initialize ItemDao
-        itemDao = new ItemDao(this);
+        itemDao = new UserItemDao(this);
 
         // Set up button click listener
         buttonSubmitItem.setOnClickListener(new View.OnClickListener() {
