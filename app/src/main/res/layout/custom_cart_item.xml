@@ -17,6 +17,7 @@
             android:id="@+id/imageViewItem"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:background="@drawable/pizza"
             android:scaleType="centerCrop"/>
 
         <TextView
