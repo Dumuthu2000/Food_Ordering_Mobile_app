@@ -10,27 +10,35 @@ public class ItemModel implements Serializable {
     private boolean availability;
     private String category;
     private String image;
+    private int quantity; // Added field for quantity
 
+    // Constructor with quantity
+    public ItemModel(int itemID, String name, String description, double price, boolean availability, String category, String image, int quantity) {
+        this.itemID = itemID;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.availability = availability;
+        this.category = category;
+        this.image = image;
+        this.quantity = quantity; // Initialize quantity
+    }
+
+    // Constructor without quantity (default quantity to 1)
     public ItemModel(String name, String description, double price, boolean availability, String category, String image) {
-        this.itemID = itemID;
         this.name = name;
         this.description = description;
         this.price = price;
         this.availability = availability;
         this.category = category;
         this.image = image;
+        this.quantity = 1; // Default quantity
     }
 
-    public ItemModel(int itemID, String name, String description, double price, boolean availability, String category, String image) {
-        this.itemID = itemID;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.availability = availability;
-        this.category = category;
-        this.image = image;
+    // Getters and setters
+    public int getItemID() {
+        return itemID;
     }
-
 
     public void setItemID(int itemID) {
         this.itemID = itemID;
@@ -84,7 +92,11 @@ public class ItemModel implements Serializable {
         this.image = image;
     }
 
-    public int getId() {
-        return itemID;
+    public int getQuantity() {
+        return quantity; // Getter for quantity
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity; // Setter for quantity
     }
 }

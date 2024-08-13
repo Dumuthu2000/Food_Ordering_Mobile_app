@@ -3,6 +3,7 @@ package com.example.food_ordering_app.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,7 +36,28 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
         holder.textViewDescription.setText(item.getDescription());
         holder.textViewPrice.setText(String.format("$%.2f", item.getPrice()));
         holder.textViewAvailability.setText(item.isAvailability() ? "Available" : "Out of Stock");
-        // Use Glide or other libraries if you have images to load
+
+        // Initialize quantity
+        final int[] quantity = {item.getQuantity()};
+        holder.textViewQuantity.setText(String.valueOf(quantity[0]));
+
+        // Increase button listener
+        holder.buttonIncrease.setOnClickListener(v -> {
+            quantity[0]++;
+            holder.textViewQuantity.setText(String.valueOf(quantity[0]));
+            item.setQuantity(quantity[0]); // Update the quantity in your ItemModel
+            // Optionally notify the adapter or update cart data
+        });
+
+        // Decrease button listener
+        holder.buttonDecrease.setOnClickListener(v -> {
+            if (quantity[0] > 1) { // Assuming a minimum quantity of 1
+                quantity[0]--;
+                holder.textViewQuantity.setText(String.valueOf(quantity[0]));
+                item.setQuantity(quantity[0]); // Update the quantity in your ItemModel
+                // Optionally notify the adapter or update cart data
+            }
+        });
     }
 
     @Override
@@ -48,6 +70,9 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
         public TextView textViewDescription;
         public TextView textViewPrice;
         public TextView textViewAvailability;
+        public TextView textViewQuantity;
+        public Button buttonDecrease;
+        public Button buttonIncrease;
 
         public CartItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,6 +80,9 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
             textViewDescription = itemView.findViewById(R.id.textViewDescription);
             textViewPrice = itemView.findViewById(R.id.textViewPrice);
             textViewAvailability = itemView.findViewById(R.id.textViewAvailability);
+            textViewQuantity = itemView.findViewById(R.id.textViewQuantity);
+            buttonDecrease = itemView.findViewById(R.id.buttonDecrease);
+            buttonIncrease = itemView.findViewById(R.id.buttonIncrease);
         }
     }
 }
