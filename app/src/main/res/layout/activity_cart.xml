@@ -9,11 +9,20 @@
     tools:context=".CartActivity">
 
     <!-- RecyclerView -->
+    <!-- Include header layout -->
+    <include
+        android:id="@+id/activity_header"
+        layout="@layout/activity_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="413dp"
-        android:layout_height="434dp"
+        android:layout_width="405dp"
+        android:layout_height="400dp"
         android:padding="16dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,7 +30,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.053"
+        app:layout_constraintVertical_bias="0.196"
         tools:ignore="NotSibling" />
 
     <LinearLayout
@@ -171,6 +180,7 @@
         android:fontFamily="@font/regular"
         android:textSize="17dp"
         android:textColor="@color/green"
+        android:onClick="handlePaymentButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"

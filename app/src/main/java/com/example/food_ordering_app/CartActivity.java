@@ -2,6 +2,7 @@ package com.example.food_ordering_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,5 +71,10 @@ public class CartActivity extends AppCompatActivity {
     private void onItemRemoved(List<ItemModel> updatedCartItems) {
         myCartItems = updatedCartItems;
         updateTotals(myCartItems); // Recalculate totals
+    }
+
+    public void handlePaymentButton(View view){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 }

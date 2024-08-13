@@ -40,7 +40,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.textViewName.setText(item.getName());
         holder.textViewDescription.setText(item.getDescription());
         holder.textViewPrice.setText(String.format("$%.2f", item.getPrice()));
-        holder.textViewAvailability.setText(item.isAvailability() ? "Available" : "Out of Stock");
+        holder.textViewAvailability.setText(item.isAvailability() ? "In Stock" : "Out of Stock");
 
         // Load image using Glide
         Glide.with(holder.imageViewItem.getContext())

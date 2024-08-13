@@ -11,7 +11,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/white"
+        android:background="@drawable/header_background"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
@@ -48,11 +48,6 @@
                 android:background="@drawable/home"
                 android:onClick="handleHomeIcon"
                 android:layout_marginRight="30dp"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cart"
-                android:onClick="handleCartIcon"/>
 
             <!-- Cart Icon with Cart Count -->
             <FrameLayout
@@ -77,7 +72,7 @@
                     android:layout_marginTop="-6dp"
                     android:background="@drawable/red_circle"
                     android:padding="4dp"
-                    android:text="20"
+                    android:text=""
                     android:textColor="@android:color/white"
                     android:textSize="15dp"
                     android:textStyle="bold"

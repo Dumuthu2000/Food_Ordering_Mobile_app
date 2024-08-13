@@ -90,7 +90,7 @@
                     android:layout_width="50dp"
                     android:layout_height="35dp"
                     android:backgroundTint="@color/white"
-                    android:layout_marginLeft="85dp"
+                    android:layout_marginLeft="75dp"
                     android:padding="0dp"
                     android:textColor="@color/red"
                     android:textStyle="bold"

@@ -34,9 +34,10 @@
 
     <Button
         android:id="@+id/cartButton"
-        android:layout_width="wrap_content"
+        android:layout_width="450dp"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="Check My Cart"
+        android:backgroundTint="@color/dark_blue"
         android:onClick="handleCartIcons"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
