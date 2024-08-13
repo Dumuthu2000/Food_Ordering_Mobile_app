@@ -1,6 +1,8 @@
 package com.example.food_ordering_app.model;
 
-public class ItemModel {
+import java.io.Serializable;
+
+public class ItemModel implements Serializable {
     private int itemID;
     private String name;
     private String description;
@@ -29,9 +31,6 @@ public class ItemModel {
         this.image = image;
     }
 
-    public int getItemID() {
-        return itemID;
-    }
 
     public void setItemID(int itemID) {
         this.itemID = itemID;
@@ -85,4 +84,7 @@ public class ItemModel {
         this.image = image;
     }
 
+    public int getId() {
+        return itemID;
+    }
 }

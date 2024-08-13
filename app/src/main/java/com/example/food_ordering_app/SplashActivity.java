@@ -43,7 +43,7 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
             // After completing the progress, start the HomeActivity
-            Intent intent = new Intent(SplashActivity.this, AddItemActivity.class);
+            Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
             startActivity(intent);
             finish(); // Finish the Splash activity so the user can't return to it
         }).start();

@@ -1,56 +1,37 @@
 package com.example.food_ordering_app;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
-
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.food_ordering_app.adapter.CartAdapter;
-import com.example.food_ordering_app.model.CartModel;
-
+import com.example.food_ordering_app.R;
+import com.example.food_ordering_app.model.ItemModel;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
-
-    private RecyclerView recyclerView;
-    private CartAdapter cartAdapter;
-    private List<CartModel> cartItemList;
+    private List<ItemModel> myCartItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // Retrieve the cart items from the intent
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("myCartItems")) {
+            myCartItems = (ArrayList<ItemModel>) intent.getSerializableExtra("myCartItems");
 
-        // Initialize the cart item list and add some sample data
-        cartItemList = new ArrayList<>();
-        cartItemList.add(new CartModel("Pizza", 12.99, 2, 25.98));
-        cartItemList.add(new CartModel("Burger", 8.99, 1, 8.99));
-        cartItemList.add(new CartModel("Burger", 8.99, 1, 8.99));
-        cartItemList.add(new CartModel("Burger", 8.99, 1, 8.99));
-        cartItemList.add(new CartModel("Burger", 8.99, 1, 8.99));
-        cartItemList.add(new CartModel("Burger", 8.99, 1, 8.99));
+            if (myCartItems == null) {
+                myCartItems = new ArrayList<>();
+                Toast.makeText(this, "No items in cart", Toast.LENGTH_SHORT).show();
+            }
 
-        // Set up the adapter
-        cartAdapter = new CartAdapter(cartItemList);
-        recyclerView.setAdapter(cartAdapter);
-
-        // Update the total amount
-        updateTotalAmount();
-    }
-
-    private void updateTotalAmount() {
-        double total = 0;
-        for (CartModel item : cartItemList) {
-            total += item.getTotalAmount();
+            // Set up RecyclerView or other UI elements to display the cart items
+            // For example, initialize RecyclerView, Adapter, etc.
+        } else {
+            Toast.makeText(this, "No cart data available", Toast.LENGTH_SHORT).show();
         }
-
-        TextView totalView = findViewById(R.id.totalView);
-        totalView.setText(String.format("$%.2f", total));
     }
 }

@@ -48,6 +48,11 @@
                 android:background="@drawable/home"
                 android:onClick="handleHomeIcon"
                 android:layout_marginRight="30dp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cart"
+                android:onClick="handleCartIcon"/>
 
             <!-- Cart Icon with Cart Count -->
             <FrameLayout
@@ -60,8 +65,7 @@
                     android:id="@+id/cartView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/cart"
-                    android:onClick="handleCartIcon"/>
+                    android:background="@drawable/cart"/>
 
                 <!-- Cart Count Badge -->
                 <TextView
