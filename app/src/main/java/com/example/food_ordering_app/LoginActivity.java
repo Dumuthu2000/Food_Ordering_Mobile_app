@@ -49,7 +49,8 @@ public class LoginActivity extends AppCompatActivity {
         UserModel user = userDao.loginUser(email, password);
 
         if (user != null) {
-            Intent intent = new Intent(this, MainActivity.class);
+            userDao.saveUserToSharedPreferences(user);
+            Intent intent = new Intent(this, OrderActivity.class);
             startActivity(intent);
         } else {
             // User login failed, no need to start MainActivity

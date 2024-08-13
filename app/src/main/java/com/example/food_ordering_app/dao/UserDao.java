@@ -2,6 +2,7 @@ package com.example.food_ordering_app.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -93,6 +94,16 @@ public class UserDao {
             }
         }
         return null;
+    }
+
+    //Add shared preferences to store user data temporary
+    public void saveUserToSharedPreferences(UserModel user) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("userId", user.getUserId());
+        editor.putString("userName", user.getUsername());
+        editor.putBoolean("isLoggedIn", true);
+        editor.apply();
     }
 
 

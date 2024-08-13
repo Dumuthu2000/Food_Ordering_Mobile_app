@@ -26,6 +26,19 @@ public class DbHandler extends SQLiteOpenHelper {
     public static final String COLUMN_ITEM_CATEGORY = "category";
     public static final String COLUMN_ITEM_IMAGE = "image";
 
+    public static final String TABLE_ORDERS = "orders";
+    public static final String COLUMN_ORDER_ID = "order_id";
+    public static final String COLUMN_ORDER_DATE = "order_date";
+    public static final String COLUMN_TOTAL_AMOUNT = "total_amount";
+    public static final String COLUMN_ORDER_STATUS = "order_status";
+    public static final String COLUMN_DELIVERY_ADDRESS = "delivery_address";
+
+    public static final String TABLE_ORDER_ITEMS = "order_items";
+    public static final String COLUMN_ORDER_ITEM_ID = "order_item_id";
+    public static final String COLUMN_MENU_ITEM_ID = "menu_item_id";
+    public static final String COLUMN_QUANTITY = "quantity";
+    public static final String COLUMN_TOTAL_ITEM_PRICE = "total_price";
+
     // Add a Context field
     private final Context context;
 
@@ -59,15 +72,41 @@ public class DbHandler extends SQLiteOpenHelper {
                     COLUMN_ITEM_CATEGORY + " TEXT, " +
                     COLUMN_ITEM_IMAGE + " TEXT);";
 
+    //SQL statements for order table
+    private static final String CREATE_ORDERS_TABLE =
+            "CREATE TABLE " + TABLE_ORDERS + " (" +
+                    COLUMN_ORDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLUMN_USER_ID + " INTEGER, " +
+                    COLUMN_ORDER_DATE + " TEXT, " +
+                    COLUMN_TOTAL_AMOUNT + " REAL, " +
+                    COLUMN_ORDER_STATUS + " TEXT, " +
+                    COLUMN_DELIVERY_ADDRESS + " TEXT, " +
+                    "FOREIGN KEY (" + COLUMN_USER_ID + ") REFERENCES " + TABLE_USERS + "(" + COLUMN_USER_ID + "))";
+
+    //SQL statements for OrderItem table
+    private static final String CREATE_ORDER_ITEMS_TABLE =
+            "CREATE TABLE " + TABLE_ORDER_ITEMS + " (" +
+                    COLUMN_ORDER_ITEM_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLUMN_ORDER_ID + " INTEGER, " +
+                    COLUMN_MENU_ITEM_ID + " INTEGER, " +
+                    COLUMN_QUANTITY + " INTEGER, " +
+                    COLUMN_TOTAL_ITEM_PRICE + " REAL, " +
+                    "FOREIGN KEY (" + COLUMN_ORDER_ID + ") REFERENCES " + TABLE_ORDERS + "(" + COLUMN_ORDER_ID + "), " +
+                    "FOREIGN KEY (" + COLUMN_MENU_ITEM_ID + ") REFERENCES " + TABLE_ITEMS + "(" + COLUMN_ITEM_ID + "))";
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_USERS_TABLE);
         db.execSQL(CREATE_ITEMS_TABLE);
+        db.execSQL(CREATE_ORDERS_TABLE);
+        db.execSQL(CREATE_ORDER_ITEMS_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ITEMS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ITEMS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ITEMS);
         onCreate(db);
     }
