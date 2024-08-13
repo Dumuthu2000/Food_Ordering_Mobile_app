@@ -121,7 +121,7 @@ public class OrderActivity extends AppCompatActivity {
             return;
         }
 
-        final String deliveryAddress = editTextDeliveryAddress.getText().toString().trim();
+        String deliveryAddress = editTextDeliveryAddress.getText().toString().trim();
         if (deliveryAddress.isEmpty()) {
             Toast.makeText(this, "Please enter a delivery address", Toast.LENGTH_LONG).show();
             return;
@@ -139,26 +139,28 @@ public class OrderActivity extends AppCompatActivity {
             ItemModel item = new ItemModel();
             item.setItemID(itemIds.get(i));
             item.setName(itemNames.get(i));
+            // Assume quantity is 1 for each item, adjust if you have actual quantities
+            item.setQuantity(1);
+            // You need to set the price for each item here
+            // item.setPrice(itemPrices.get(i));
             orderItems.add(item);
         }
         order.setOrderItems(orderItems);
 
         OrderDao orderDao = new OrderDao(this);
 
-        // Run database operation on a background thread
         new Thread(new Runnable() {
             @Override
             public void run() {
-                final boolean success = orderDao.createOrder(order);
+                final long orderId = orderDao.createOrder(order);
 
-                // Update UI on the main thread
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (success) {
+                        if (orderId != -1) {
                             Toast.makeText(OrderActivity.this, "Order placed successfully!", Toast.LENGTH_LONG).show();
-                            editTextDeliveryAddress.setText(""); // Clear the address field
-                            navigateToConfirmationScreen();
+                            editTextDeliveryAddress.setText("");
+                            navigateToConfirmationScreen(orderId);
                         } else {
                             Toast.makeText(OrderActivity.this, "Failed to place order. Please try again.", Toast.LENGTH_LONG).show();
                         }
@@ -166,6 +168,13 @@ public class OrderActivity extends AppCompatActivity {
                 });
             }
         }).start();
+    }
+
+    private void navigateToConfirmationScreen(long orderId) {
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra("orderId", orderId);
+        startActivity(intent);
+        finish();
     }
 
     private boolean validateOrder() {

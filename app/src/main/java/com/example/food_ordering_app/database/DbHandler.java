@@ -16,6 +16,13 @@ public class DbHandler extends SQLiteOpenHelper {
     public static final String COLUMN_PASSWORD = "password";
     public static final String COLUMN_PROFILE_PICTURE = "profile_picture";
 
+    public static final String TABLE_ADMIN_USERS = "admin_users";
+    public static final String COLUMN_ADMIN_ID = "admin_id";
+    public static final String COLUMN_ADMIN_USERNAME = "admin_username";
+    public static final String COLUMN_ADMIN_EMAIL = "admin_email";
+    public static final String COLUMN_ADMIN_PASSWORD = "admin_password";
+    public static final String COLUMN_ADMIN_ROLE = "admin_role";
+
     // New table and column names for items
     public static final String TABLE_ITEMS = "items";
     public static final String COLUMN_ITEM_ID = "item_id";
@@ -60,6 +67,13 @@ public class DbHandler extends SQLiteOpenHelper {
                     COLUMN_EMAIL + " TEXT, " +
                     COLUMN_PASSWORD + " TEXT, " +
                     COLUMN_PROFILE_PICTURE + " TEXT);";
+    private static final String CREATE_ADMIN_USERS_TABLE =
+            "CREATE TABLE " + TABLE_ADMIN_USERS + " (" +
+                    COLUMN_ADMIN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLUMN_ADMIN_USERNAME + " TEXT, " +
+                    COLUMN_ADMIN_EMAIL + " TEXT, " +
+                    COLUMN_ADMIN_PASSWORD + " TEXT, " +
+                    COLUMN_ADMIN_ROLE + " TEXT);";
 
     // SQL statement to create items table
     private static final String CREATE_ITEMS_TABLE =
@@ -100,11 +114,13 @@ public class DbHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_ITEMS_TABLE);
         db.execSQL(CREATE_ORDERS_TABLE);
         db.execSQL(CREATE_ORDER_ITEMS_TABLE);
+        db.execSQL(CREATE_ADMIN_USERS_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ADMIN_USERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ITEMS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ITEMS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ITEMS);

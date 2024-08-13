@@ -50,11 +50,16 @@ public class LoginActivity extends AppCompatActivity {
 
         if (user != null) {
             userDao.saveUserToSharedPreferences(user);
-            Intent intent = new Intent(this, OrderActivity.class);
+            Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
         } else {
             // User login failed, no need to start MainActivity
             Toast.makeText(this, "Login failed. Please check your credentials.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void handleAdminLoginButton(View view){
+        Intent intent = new Intent(this, AdminLogin.class);
+        startActivity(intent);
     }
 }

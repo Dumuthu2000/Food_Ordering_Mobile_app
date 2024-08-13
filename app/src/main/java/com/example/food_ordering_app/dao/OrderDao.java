@@ -1,61 +1,60 @@
 package com.example.food_ordering_app.dao;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.example.food_ordering_app.database.DbHandler;
+import com.example.food_ordering_app.model.ItemModel;
 import com.example.food_ordering_app.model.OrderModel;
 
 public class OrderDao {
-    private final Context context;
-    private SQLiteDatabase database;
-    private DbHandler dbHelper;
+    private DbHandler dbHandler;
 
     public OrderDao(Context context) {
-        this.context = context;
-        dbHelper = new DbHandler(context);
-        database = dbHelper.getWritableDatabase();
+        this.dbHandler = new DbHandler(context);
     }
 
-    public boolean createOrder(OrderModel order){
-        try{
-            ContentValues values = new ContentValues();
-            values.put("user_id", order.getUserId());
-            values.put("order_date", order.getOrderDate());
-            values.put("total_amount", order.getTotalAmount());
-            values.put("order_status", order.getOrderStatus());
-            values.put("delivery_address", order.getDeliveryAddress());
+    public long createOrder(OrderModel order) {
+        SQLiteDatabase db = dbHandler.getWritableDatabase();
+        long orderId = -1;
 
-            long result = database.insert(DbHandler.TABLE_ORDERS, null, values);
+        try {
+            db.beginTransaction();
 
-            if (result == -1) {
-                // Insert operation failed
-                Log.e(TAG, "Failed to create order: " + order.getOrderId());
-                Toast.makeText(dbHelper.getContext(), "Registration failed. Please try again.", Toast.LENGTH_SHORT).show();
-            } else {
-                // Insert operation succeeded
-                Toast.makeText(dbHelper.getContext(), "Order create successfully.", Toast.LENGTH_SHORT).show();
+            ContentValues orderValues = new ContentValues();
+            orderValues.put(DbHandler.COLUMN_USER_ID, order.getUserId());
+            orderValues.put(DbHandler.COLUMN_ORDER_DATE, order.getOrderDate());
+            orderValues.put(DbHandler.COLUMN_TOTAL_AMOUNT, order.getTotalAmount());
+            orderValues.put(DbHandler.COLUMN_ORDER_STATUS, order.getOrderStatus());
+            orderValues.put(DbHandler.COLUMN_DELIVERY_ADDRESS, order.getDeliveryAddress());
+
+            orderId = db.insert(DbHandler.TABLE_ORDERS, null, orderValues);
+
+            if (orderId != -1) {
+                for (ItemModel item : order.getOrderItems()) {
+                    ContentValues itemValues = new ContentValues();
+                    itemValues.put(DbHandler.COLUMN_ORDER_ID, orderId);
+                    itemValues.put(DbHandler.COLUMN_MENU_ITEM_ID, item.getItemID());
+                    itemValues.put(DbHandler.COLUMN_QUANTITY, item.getQuantity());
+                    itemValues.put(DbHandler.COLUMN_TOTAL_ITEM_PRICE, item.getPrice() * item.getQuantity());
+
+                    long orderItemId = db.insert(DbHandler.TABLE_ORDER_ITEMS, null, itemValues);
+                    if (orderItemId == -1) {
+                        throw new SQLException("Failed to insert order item");
+                    }
+                }
             }
-        } catch (SQLException e) {
-            // Handle SQL exceptions
-            Log.e(TAG, "SQL Error: " + e.getMessage());
-            Toast.makeText(dbHelper.getContext(), "Database error. Please contact support.", Toast.LENGTH_LONG).show();
+
+            db.setTransactionSuccessful();
         } catch (Exception e) {
-            // Handle any other exceptions
-            Log.e(TAG, "Error: " + e.getMessage());
-            Toast.makeText(dbHelper.getContext(), "Unexpected error. Please try again.", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+            orderId = -1;
         } finally {
-            // Close the database
-            if (database != null && database.isOpen()) {
-                database.close();
-            }
+            db.endTransaction();
         }
-        return false;
+
+        return orderId;
     }
 }
