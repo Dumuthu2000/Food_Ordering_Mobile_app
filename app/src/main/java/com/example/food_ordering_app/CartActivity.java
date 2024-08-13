@@ -73,8 +73,27 @@ public class CartActivity extends AppCompatActivity {
         updateTotals(myCartItems); // Recalculate totals
     }
 
-    public void handlePaymentButton(View view){
-        Intent intent = new Intent(this, LoginActivity.class);
+    public void handlePaymentButton(View view) {
+        Intent intent = new Intent(this, OrderActivity.class);
+
+        // Create lists to store item names and ids
+        ArrayList<String> itemNames = new ArrayList<>();
+        ArrayList<Integer> itemIds = new ArrayList<>();
+
+        // Populate the lists
+        for (ItemModel item : myCartItems) {
+            itemNames.add(item.getName());
+            itemIds.add(item.getItemID());
+        }
+
+        // Pass the lists to the intent
+        intent.putStringArrayListExtra("itemNames", itemNames);
+        intent.putIntegerArrayListExtra("itemIds", itemIds);
+
+        // Pass the total amount
+        double totalAmount = Double.parseDouble(totalView.getText().toString().replace("Rs", ""));
+        intent.putExtra("totalAmount", totalAmount);
+
         startActivity(intent);
     }
 }

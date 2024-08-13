@@ -10,7 +10,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.food_ordering_app.database.DbHandler;
-import com.example.food_ordering_app.model.ItemModel;
 import com.example.food_ordering_app.model.OrderModel;
 
 public class OrderDao {
@@ -24,7 +23,7 @@ public class OrderDao {
         database = dbHelper.getWritableDatabase();
     }
 
-    public void createOrder(OrderModel order){
+    public boolean createOrder(OrderModel order){
         try{
             ContentValues values = new ContentValues();
             values.put("user_id", order.getUserId());
@@ -57,5 +56,6 @@ public class OrderDao {
                 database.close();
             }
         }
+        return false;
     }
 }

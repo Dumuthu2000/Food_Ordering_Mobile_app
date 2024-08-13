@@ -12,6 +12,9 @@ public class ItemModel implements Serializable {
     private String image;
     private int quantity; // Added field for quantity
 
+    public ItemModel() {
+    }
+
     // Constructor with quantity
     public ItemModel(int itemID, String name, String description, double price, boolean availability, String category, String image, int quantity) {
         this.itemID = itemID;
