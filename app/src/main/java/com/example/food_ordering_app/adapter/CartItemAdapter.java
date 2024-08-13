@@ -17,10 +17,12 @@ import java.util.List;
 public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartItemViewHolder> {
     private List<ItemModel> cartItems;
     private final OnQuantityChangeListener quantityChangeListener;
+    private final OnItemRemovedListener itemRemovedListener;
 
-    public CartItemAdapter(List<ItemModel> cartItems, OnQuantityChangeListener quantityChangeListener) {
+    public CartItemAdapter(List<ItemModel> cartItems, OnQuantityChangeListener quantityChangeListener, OnItemRemovedListener itemRemovedListener) {
         this.cartItems = cartItems;
         this.quantityChangeListener = quantityChangeListener;
+        this.itemRemovedListener = itemRemovedListener;
     }
 
     @NonNull
@@ -35,7 +37,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
     public void onBindViewHolder(@NonNull CartItemViewHolder holder, int position) {
         ItemModel item = cartItems.get(position);
         holder.textViewName.setText(item.getName());
-        holder.textViewPrice.setText(String.format("$%.2f", item.getPrice()));
+        holder.textViewPrice.setText(String.format("Rs%.2f", item.getPrice()));
         holder.textViewQuantity.setText(String.valueOf(item.getQuantity()));
 
         holder.buttonIncrease.setOnClickListener(v -> {
@@ -51,6 +53,13 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
                 quantityChangeListener.onQuantityChange(cartItems);
             }
         });
+
+        holder.buttonRemove.setOnClickListener(v -> {
+            cartItems.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, cartItems.size());
+            itemRemovedListener.onItemRemoved(cartItems); // Notify listener
+        });
     }
 
     @Override
@@ -62,12 +71,17 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
         void onQuantityChange(List<ItemModel> updatedCartItems);
     }
 
+    public interface OnItemRemovedListener {
+        void onItemRemoved(List<ItemModel> updatedCartItems);
+    }
+
     public static class CartItemViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewName;
         public TextView textViewPrice;
         public TextView textViewQuantity;
         public Button buttonIncrease;
         public Button buttonDecrease;
+        public Button buttonRemove;
 
         public CartItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -76,6 +90,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
             textViewQuantity = itemView.findViewById(R.id.textViewQuantity);
             buttonIncrease = itemView.findViewById(R.id.buttonIncrease);
             buttonDecrease = itemView.findViewById(R.id.buttonDecrease);
+            buttonRemove = itemView.findViewById(R.id.buttonRemove);
         }
     }
 }

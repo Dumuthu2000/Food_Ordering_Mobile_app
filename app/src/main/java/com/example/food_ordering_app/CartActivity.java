@@ -43,23 +43,21 @@ public class CartActivity extends AppCompatActivity {
             deliveryChargesView = findViewById(R.id.deliveryChargesView);
             totalView = findViewById(R.id.totalView);
 
-            cartItemAdapter = new CartItemAdapter(myCartItems, this::updateTotals);
+            cartItemAdapter = new CartItemAdapter(myCartItems, this::updateTotals, this::onItemRemoved);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(cartItemAdapter);
 
-            updateTotals(myCartItems); // Initial update
-        } else {
-            Toast.makeText(this, "No cart data available", Toast.LENGTH_SHORT).show();
+            updateTotals(myCartItems);
         }
     }
 
-    private void updateTotals(List<ItemModel> cartItems) {
+    private void updateTotals(List<ItemModel> updatedCartItems) {
         double itemTotal = 0.0;
-        for (ItemModel item : cartItems) {
+        for (ItemModel item : updatedCartItems) {
             itemTotal += item.getPrice() * item.getQuantity();
         }
 
-        double discount = 0.00; // You can calculate this based on your logic
+        double discount = 0.00; // Calculate discount if needed
         double deliveryCharges = 300.00; // Example delivery charge
         double grandTotal = itemTotal - discount + deliveryCharges;
 
@@ -67,5 +65,10 @@ public class CartActivity extends AppCompatActivity {
         discountView.setText(String.format("Rs%.2f", discount));
         deliveryChargesView.setText(String.format("Rs%.2f", deliveryCharges));
         totalView.setText(String.format("Rs%.2f", grandTotal));
+    }
+
+    private void onItemRemoved(List<ItemModel> updatedCartItems) {
+        myCartItems = updatedCartItems;
+        updateTotals(myCartItems); // Recalculate totals
     }
 }
