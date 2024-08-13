@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,20 +17,14 @@ import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
     private List<ItemModel> myCartItems;
-    private RecyclerView recyclerView;
     private CartItemAdapter cartItemAdapter;
-    private TextView itemsTotalView, discountView, deliveryChargesView, totalView;
+    private RecyclerView recyclerView;
+    private TextView itemTotalView, discountView, deliveryChargesView, totalView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-
-        recyclerView = findViewById(R.id.recyclerView);
-        itemsTotalView = findViewById(R.id.itemsTotalView);
-        discountView = findViewById(R.id.discountView);
-        deliveryChargesView = findViewById(R.id.deliveryChargesView);
-        totalView = findViewById(R.id.totalView);
 
         // Retrieve the cart items from the intent
         Intent intent = getIntent();
@@ -41,31 +36,36 @@ public class CartActivity extends AppCompatActivity {
                 Toast.makeText(this, "No items in cart", Toast.LENGTH_SHORT).show();
             }
 
-            // Set up RecyclerView
+            // Initialize RecyclerView
+            recyclerView = findViewById(R.id.recyclerView);
+            itemTotalView = findViewById(R.id.itemsTotalView);
+            discountView = findViewById(R.id.discountView);
+            deliveryChargesView = findViewById(R.id.deliveryChargesView);
+            totalView = findViewById(R.id.totalView);
+
+            cartItemAdapter = new CartItemAdapter(myCartItems, this::updateTotals);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            cartItemAdapter = new CartItemAdapter(myCartItems);
             recyclerView.setAdapter(cartItemAdapter);
 
-            // Calculate and display totals
-            updateTotals();
+            updateTotals(myCartItems); // Initial update
         } else {
             Toast.makeText(this, "No cart data available", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void updateTotals() {
+    private void updateTotals(List<ItemModel> cartItems) {
         double itemTotal = 0.0;
-        for (ItemModel item : myCartItems) {
-            itemTotal += item.getPrice();
+        for (ItemModel item : cartItems) {
+            itemTotal += item.getPrice() * item.getQuantity();
         }
 
-        double discount = 0.0; // You can calculate or retrieve this from elsewhere
-        double deliveryCharges = 300.00; // Fixed or calculated value
+        double discount = 0.00; // You can calculate this based on your logic
+        double deliveryCharges = 300.00; // Example delivery charge
         double grandTotal = itemTotal - discount + deliveryCharges;
 
-        itemsTotalView.setText(String.format("$%.2f", itemTotal));
-        discountView.setText(String.format("$%.2f", discount));
-        deliveryChargesView.setText(String.format("$%.2f", deliveryCharges));
-        totalView.setText(String.format("$%.2f", grandTotal));
+        itemTotalView.setText(String.format("Rs%.2f", itemTotal));
+        discountView.setText(String.format("Rs%.2f", discount));
+        deliveryChargesView.setText(String.format("Rs%.2f", deliveryCharges));
+        totalView.setText(String.format("Rs%.2f", grandTotal));
     }
 }

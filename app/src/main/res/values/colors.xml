@@ -7,4 +7,8 @@
     <color name="green">#006d77</color>
     <color name="light_purple">#c8e7ff</color>
     <color name="navy_blue">#01497c</color>
+    <color name="red">#d00000</color>
+    <color name="dark_black">#0d1b2a</color>
+    <color name="ash_white">#faf9f9</color>
+    <color name="light_green">#80ed99</color>
 </resources>
