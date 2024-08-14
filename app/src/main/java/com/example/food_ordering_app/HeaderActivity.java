@@ -33,18 +33,12 @@ public class HeaderActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // Handle the click on the Cart icon
-    public void handleCartIcon(View view) {
-        Intent intent = new Intent(HeaderActivity.this, CartActivity.class);
-        startActivity(intent);
-    }
-
     // Method to update cart count
-    public void updateCartCount(int count) {
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt(KEY_CART_COUNT, count);
-        editor.apply();
-        cartCountView.setText(String.valueOf(count));
-    }
+//    public void updateCartCount(int count) {
+//        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+//        SharedPreferences.Editor editor = prefs.edit();
+//        editor.putInt(KEY_CART_COUNT, count);
+//        editor.apply();
+//        cartCountView.setText(String.valueOf(count));
+//    }
 }

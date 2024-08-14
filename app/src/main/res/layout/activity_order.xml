@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/header_background"
     tools:context=".OrderActivity">
 
     <LinearLayout
@@ -17,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Your Order"
+            android:textColor="@color/navy_blue"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginBottom="16dp"/>
@@ -53,34 +55,6 @@
             android:lines="3"
             android:layout_marginBottom="16dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Payment Method"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp"/>
-
-        <RadioGroup
-            android:id="@+id/radioGroupPaymentMethod"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="16dp">
-
-            <RadioButton
-                android:id="@+id/radioButtonCashOnDelivery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cash on Delivery"/>
-
-            <RadioButton
-                android:id="@+id/radioButtonCard"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Card"/>
-        </RadioGroup>
-
         <LinearLayout
             android:id="@+id/layoutCardDetails"
             android:layout_width="match_parent"
@@ -107,6 +81,7 @@
             android:id="@+id/buttonConfirmOrder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/navy_blue"
             android:text="Confirm Order"
             android:layout_marginTop="16dp"/>
 

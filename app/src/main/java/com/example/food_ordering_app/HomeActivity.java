@@ -70,4 +70,9 @@ public class HomeActivity extends AppCompatActivity implements ItemAdapter.OnAdd
         intent.putExtra("myCartItems", new ArrayList<>(myCart));
         startActivity(intent);
     }
+
+    public void handleUserProfile(View view) {
+        Intent intent = new Intent(this, UserProfileActivity.class);
+        startActivity(intent);
+    }
 }

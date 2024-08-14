@@ -92,4 +92,7 @@ public class AdminDao {
         }
         return null;
     }
+
+    public void saveAdminToSharedPreferences(AdminModel admin) {
+    }
 }
